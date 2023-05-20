@@ -1,0 +1,18 @@
+[package]
+name = "eveon_engine"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+env_logger = "0.10.0"
+log = "0.4.17"
+cgmath = "0.18.0"
+gl = "0.14.0"
+glfw = "0.51.0"
+serde = { version = "1.0.163", features = ["derive"] }
+toml = "0.7.3"
+glob = "0.3.1"
+dlopen = "0.1.8"
+dlopen_derive = "0.1.4"
