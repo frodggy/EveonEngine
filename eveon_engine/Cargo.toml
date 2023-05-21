@@ -16,3 +16,4 @@ toml = "0.7.3"
 glob = "0.3.1"
 dlopen = "0.1.8"
 dlopen_derive = "0.1.4"
+egui_glfw_gl = { git = "https://github.com/shivang51/egui_glfw_gl.git", version = "0.13.1" }
