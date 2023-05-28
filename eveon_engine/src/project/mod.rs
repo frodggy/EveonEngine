@@ -5,7 +5,10 @@ use std::{
     path::{Path, PathBuf},
 };
 
-use crate::{platform::{self, BuildConfig}, logger};
+use crate::{
+    logger,
+    platform::{self, BuildConfig},
+};
 
 #[derive(Debug, Clone)]
 pub struct Project {
@@ -14,10 +17,14 @@ pub struct Project {
 }
 
 impl Project {
-    pub fn new() {}
+    pub fn new(path: &Path) -> Self {
+        Self {
+            project_path: path.to_str().unwrap().to_string(),
+            config: ProjectConfig::default(),
+        }
+    }
 
     pub fn open(path: &Path) -> Self {
-        logger::init();
         let old_path = env::current_dir().unwrap();
         env::set_current_dir(path).unwrap();
 
@@ -43,6 +50,10 @@ impl Project {
         let path = Path::new(&self.get_project_dir())
             .join(cfg.project.config.resources_dir.replace("./", ""));
         path
+    }
+
+    pub fn get_name(&self) -> String {
+        self.config.project.name.clone()
     }
 
     pub fn get_source_dir(&self) -> PathBuf {

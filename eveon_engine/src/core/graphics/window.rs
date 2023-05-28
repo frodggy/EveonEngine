@@ -1,10 +1,11 @@
 use std::sync::mpsc::Receiver;
 
+use crate::logger;
 use egui_glfw_gl as egui_backend;
 use glfw::{Action, Context, Key, WindowEvent, WindowMode};
 
 pub struct EvWindow {
-    glfw: glfw::Glfw,
+    pub glfw: glfw::Glfw,
     pub window: glfw::Window,
     vsync: bool,
     pub events: Receiver<(f64, WindowEvent)>,
@@ -65,6 +66,9 @@ impl EvWindow {
             match event {
                 glfw::WindowEvent::Key(Key::Escape, _, Action::Press, _) => {
                     self.window.set_should_close(true)
+                }
+                glfw::WindowEvent::Key(Key::L, _, Action::Press, _) => {
+                    logger::info!("Demo log")
                 }
                 glfw::WindowEvent::FramebufferSize(height, width) => unsafe {
                     gl::Viewport(0, 0, width, height)

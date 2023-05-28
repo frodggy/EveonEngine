@@ -1,7 +1,6 @@
-use cgmath::Matrix;
-use gl::{types::*, GetUniformLocation};
 use crate::logger as eveon_logger;
-
+use cgmath::Matrix;
+use gl::types::*;
 
 use std::{
     collections::HashMap,
@@ -24,6 +23,18 @@ impl Vao {
         }
 
         Self { id }
+    }
+
+    pub fn get_id(&self) -> GLuint {
+        self.id
+    }
+
+    pub fn bind(&self) {
+        unsafe { gl::BindVertexArray(self.id) }
+    }
+
+    pub fn unbind(&self) {
+        unsafe { gl::BindVertexArray(0) }
     }
 }
 
@@ -87,16 +98,24 @@ impl VertexAttr {
         normalized: GLboolean,
         stride: GLsizei,
         pointer: *const c_void,
-    ) {
-        unsafe { gl::VertexAttribPointer(index, size, r#type, normalized, stride, pointer) }
+    ) -> Self {
+        unsafe {
+            gl::VertexAttribPointer(index, size, r#type, normalized, stride, pointer);
+        }
+
+        Self { index }
     }
 
     pub fn enable(&self) {
-        unsafe { gl::EnableVertexAttribArray(self.index) }
+        unsafe {
+            gl::EnableVertexAttribArray(self.index);
+        }
     }
 
     pub fn disable(&self) {
-        unsafe { gl::DisableVertexAttribArray(self.index) }
+        unsafe {
+            gl::DisableVertexAttribArray(self.index);
+        }
     }
 }
 
@@ -175,13 +194,6 @@ impl ShaderProgram {
     }
 
     pub fn set_uniform_matrix4(&self, name: &str, matrix: &cgmath::Matrix4<f32>) {
-        unsafe {
-            gl::UniformMatrix4fv(
-                self.uniform_ids[name],
-                1,
-                gl::FALSE,
-                matrix.as_ptr(),
-            )
-        }
+        unsafe { gl::UniformMatrix4fv(self.uniform_ids[name], 1, gl::FALSE, matrix.as_ptr()) }
     }
 }

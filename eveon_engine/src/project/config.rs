@@ -2,7 +2,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Deserialize, Serialize, Default, Clone)]
 pub struct ProjectConfig {
-    pub project: ProjectConfigWrapper
+    pub project: ProjectConfigWrapper,
 }
 #[derive(Debug, Deserialize, Serialize, Default, Clone)]
 pub struct ProjectConfigWrapper {
