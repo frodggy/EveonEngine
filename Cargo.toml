@@ -1,5 +1,6 @@
 [workspace]
 members = [
+    "eveon_api",
     "eveon_engine",
     "eveon_editor",
     "test"
