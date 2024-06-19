@@ -1,7 +1,17 @@
+[package]
+name = "eveon"
+version = "0.1.0"
+edition = "2021"
+
+[features]
+default = ["opengl"]
+opengl = []
+vulkan = []
+
 [workspace]
-members = [
-    "eveon_api",
-    "eveon_engine",
-    "eveon_editor",
-    "test"
-]
+members = ["example"]
+
+[dependencies]
+gl = "0.14.0"
+glfw = "0.57.0"
+spdlog-rs = "0.3.13"
